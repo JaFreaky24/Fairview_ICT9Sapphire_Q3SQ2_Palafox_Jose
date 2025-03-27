@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deadpool Movie Ticketing</title>
+
+    <!-- Bootstrap CSS Link -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* Custom CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000; /* Set background to black */
+            color: #fff; /* Set text color to white for contrast */
+        }
+
+        .container {
+            margin-top: 50px;
+        }
+
+        .section {
+            margin-bottom: 30px;
+        }
+
+        .btn-custom {
+            background-color: #ff0000;
+            color: white;
+            font-size: 18px;
+            border: none;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-custom:hover {
+            background-color: #b30000;
+        }
+
+        .footer {
+            background-color: #222;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        h1 {
+            color: #e60000;
+        }
+
+        h3 {
+            color: #ff4747;
+        }
+
+        .deadpool-image {
+            width: 100%;
+            border-radius: 10px;
+        }
+
+        .btn-danger {
+            background-color: #f44336;
+        }
+
+        .btn-danger:hover {
+            background-color: #d32f2f;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Header Section -->
+    <div class="container text-center">
+        <h1>Welcome to Deadpool Movie Ticketing Center</h1>
+        <p>Get your tickets for the latest *Deadpool* movie and join the merc with the mouth!</p>
+    </div>
+
+    <!-- Main Content Section -->
+    <div class="container">
+        <div class="section">
+            <button class="btn btn-custom" onclick="toggleContent('movieDetails')">Show Movie Details</button>
+            <div id="movieDetails" class="mt-3" style="display:none;">
+                <h3>Deadpool 3 - The Merc is Back!</h3>
+                <img src="https://via.placeholder.com/1200x600.png?text=Deadpool+Movie" alt="Deadpool Movie Poster" class="deadpool-image">
+                <p>Release Date: 15th March 2025</p>
+                <p>Location: All Major Theaters</p>
+                <p>Price: $15 per ticket</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h3>Book Your Deadpool Ticket</h3>
+            <form id="ticketForm">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="seatCount">Number of Seats</label>
+                    <select class="form-control" id="seatCount" required>
+                        <option value="">Select number of seats</option>
+                        <option value="1">1 Seat</option>
+                        <option value="2">2 Seats</option>
+                        <option value="3">3 Seats</option>
+                        <option value="4">4 Seats</option>
+                        <option value="5">5 Seats</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-custom" onclick="verifyBooking()">Book Deadpool Ticket</button>
+            </form>
+            <div id="confirmationMessage" class="mt-3" style="display:none;">
+                <p>Your ticket has been successfully booked. Welcome to the world of Deadpool!</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <button class="btn btn-custom" onclick="toggleContent('contactUs')">Contact Us (We’re kind of a big deal)</button>
+            <div id="contactUs" class="mt-3" style="display:none;">
+                <h3>Get in Touch</h3>
+                <p>Phone: 123-456-7890</p>
+                <p>Email: support@deadpoolmovies.com</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 Deadpool Movie Ticketing. All rights reserved. Don’t forget to wear your chimichangas.</p>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- JavaScript Code -->
+    <script>
+        // Function to toggle visibility of content
+        function toggleContent(sectionId) {
+            var section = document.getElementById(sectionId);
+            if (section.style.display === "none") {
+                section.style.display = "block";
+            } else {
+                section.style.display = "none";
+            }
+        }
+
+        // Function to verify ticket booking and display a confirmation message
+        function verifyBooking() {
+            // Get form values
+            var fullName = document.getElementById("fullName").value;
+            var email = document.getElementById("email").value;
+            var seatCount = document.getElementById("seatCount").value;
+
+            // Validate form
+            if (!fullName || !email || !seatCount) {
+                alert("Please fill out all fields.");
+                return;
+            }
+
+            // JavaScript variables (using different data types)
+            var ticketPrice = 15; // Number (numeric value)
+            var totalCost = ticketPrice * seatCount;
+
+            // Display confirmation message
+            var confirmationMessage = `
+                <p>Thank you, ${fullName}! Your Deadpool ticket for ${seatCount} seat(s) has been confirmed.</p>
+                <p>Total cost: $${totalCost}</p>
+                <p>A confirmation email has been sent to: ${email}</p>
+            `;
+            document.getElementById("confirmationMessage").innerHTML = confirmationMessage;
+            document.getElementById("confirmationMessage").style.display = "block";
+        }
+    </script>
+</body>
+
+</html>
